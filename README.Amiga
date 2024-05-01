@@ -1,6 +1,7 @@
-Short: Port of GNU Make with SAS/C (no ixemul.library required)
+Short: Port of GNU Make with SAS/C (no ixemul)
 Author: GNU, Amiga port by Aaron "Optimizer" Digulla, 4.4.1 updates by Darren Coles
 Uploader: Darren Coles (darren_m_coles@yahoo.co.uk)
+Architecture: m68k-amigaos
 Type: dev/c
 
 ----------------------------------------------------------------------------
