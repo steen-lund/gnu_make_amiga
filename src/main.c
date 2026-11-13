@@ -1601,7 +1601,7 @@ main (int argc, char **argv, char **envp)
 		proc = (struct Process *)FindTask(0);
 		localvars = &proc->pr_LocalVars;
 		localvar = (struct LocalVar *)localvars->mlh_Head;
-		while (localvar && localvar->lv_Node.ln_Succ != localvars)
+		while (localvar && localvar->lv_Node.ln_Succ)
 		{
 			 if (localvar->lv_Node.ln_Type==LV_VAR)
 			 {

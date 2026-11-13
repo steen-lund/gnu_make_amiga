@@ -2696,6 +2696,7 @@ void
 exec_command (char **argv)
 {
   MyExecute (argv,0);
+  exit (0);
 }
 
 void clean_tmp (void)

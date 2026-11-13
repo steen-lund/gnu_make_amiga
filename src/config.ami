@@ -267,6 +267,7 @@ this program.  If not, see <https://www.gnu.org/licenses/>.  */
 #define HAVE_MEMPCPY 1
 #define HAVE_STPCPY 1
 #define HAVE_UMASK 1
+#define HAVE_SA_RESTART 1
 #define HAVE_STDLIB_H 1
 #define HAVE_STRCASECMP 1
 #define HAVE_STRNCASECMP 1
