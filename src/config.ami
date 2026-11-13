@@ -43,14 +43,20 @@ this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* Define to the widest signed integer type if <stdint.h> and <inttypes.h> do
    not define. */
+#ifndef __GNUC__
 #define intmax_t long
+#endif
 
 /* Define to 'unsigned long' or 'unsigned long long'
    if <inttypes.h> doesn't define.  */
+#ifndef __GNUC__
 #define uintmax_t unsigned long
+#endif
 
 /* Define to 'int' if <sys/types.h> doesn't define.  */
+#ifndef __GNUC__
 #define gid_t int
+#endif
 
 /* Define if you have alloca, as a function or macro.  */
 /* #undef HAVE_ALLOCA */
@@ -130,7 +136,9 @@ this program.  If not, see <https://www.gnu.org/licenses/>.  */
 /* #undef NO_MINUS_C_MINUS_O */
 
 /* Define to 'int' if <sys/types.h> doesn't define.  */
+#ifndef __GNUC__
 #define pid_t int
+#endif
 
 /* Define if the system does not provide POSIX.1 features except
    with this defined.  */
@@ -161,7 +169,9 @@ this program.  If not, see <https://www.gnu.org/licenses/>.  */
 /* #undef SYS_SIGLIST_DECLARED */
 
 /* Define to 'int' if <sys/types.h> doesn't define.  */
+#ifndef __GNUC__
 #define uid_t int
+#endif
 
 /* Define for Encore UMAX.  */
 /* #undef UMAX */
@@ -252,6 +262,16 @@ this program.  If not, see <https://www.gnu.org/licenses/>.  */
 /* Define if you have the strsignal function.  */
 /* #undef HAVE_STRSIGNAL */
 
+#ifdef __GNUC__
+/* GCC/libnix provides these (stpcpy and mempcpy as static inlines).  */
+#define HAVE_MEMPCPY 1
+#define HAVE_STPCPY 1
+#define HAVE_UMASK 1
+#define HAVE_STDLIB_H 1
+#define HAVE_STRCASECMP 1
+#define HAVE_STRNCASECMP 1
+#endif
+
 /* Define if you have the strtoll function.  */
 /* #undef HAVE_STRTOLL */
 
@@ -328,7 +348,9 @@ this program.  If not, see <https://www.gnu.org/licenses/>.  */
 #define MAKE_HOST "Amiga"
 
 /* Define to `int' if <sys/types.h> does not define. */
+#ifndef __GNUC__
 #define ssize_t int
+#endif
 
 /* Include customized declarations.  */
 #include "src/mkcustom.h"

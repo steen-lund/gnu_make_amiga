@@ -1570,7 +1570,11 @@ main (int argc, char **argv, char **envp)
 		struct MinList *localvars;
 		struct LocalVar *localvar;
 		char *varval;
+#ifdef AMIGA_GCC
+    struct FileInfoBlock fib __attribute__ ((aligned (4)));
+#else
     __aligned struct FileInfoBlock fib;
+#endif
 
     /*env = Lock ("ENV:", ACCESS_READ);
     if (env)
@@ -2811,7 +2815,7 @@ main (int argc, char **argv, char **envp)
           jobserver_pre_child(1);
 
 #ifdef _AMIGA
-          exec_command (nargv);
+          exec_command ((char **)nargv);
           exit (0);
 #elif defined (__EMX__)
           {

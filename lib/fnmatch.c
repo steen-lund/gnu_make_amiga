@@ -120,7 +120,7 @@ USA.  */
 /* Avoid depending on library functions or files
    whose names are inconsistent.  */
 
-# if !defined _LIBC && !defined getenv
+# if !defined _LIBC && !defined getenv && !defined AMIGA_GCC
 extern char *getenv ();
 # endif
 

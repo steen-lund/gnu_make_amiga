@@ -537,6 +537,10 @@ typedef struct
     unsigned long offset;
   } floc;
 
+#ifdef AMIGA_GCC
+/* libnix <string.h> declares an unrelated concat().  */
+# define concat make_concat
+#endif
 const char *concat (unsigned int, ...);
 void message (int prefix, size_t length, const char *fmt, ...)
               ATTRIBUTE ((__format__ (__printf__, 3, 4)));
@@ -574,13 +578,13 @@ void pfatal_with_name (const char *) NORETURN;
 void perror_with_name (const char *, const char *);
 #define xstrlen(_s) ((_s)==NULL ? 0 : strlen (_s))
 unsigned int make_toui (const char*, const char**);
-#ifndef _AMIGA
+#if !defined(_AMIGA) || defined(AMIGA_GCC)
 char *make_lltoa (long long, char *);
 char *make_ulltoa (unsigned long long, char *);
 #endif
 void make_seed (unsigned int);
 unsigned int make_rand (void);
-#ifndef _AMIGA
+#if !defined(_AMIGA) || defined(AMIGA_GCC)
 pid_t make_pid (void);
 #endif
 void *xmalloc (size_t);
@@ -684,7 +688,7 @@ void dbg (const char *fmt, ...);
 /* We omit these declarations on non-POSIX systems which define _POSIX_VERSION,
    because such systems often declare them in header files anyway.  */
 
-#if !defined (__GNU_LIBRARY__) && !defined (POSIX) && !defined (_POSIX_VERSION) && !defined(WINDOWS32)
+#if !defined (__GNU_LIBRARY__) && !defined (POSIX) && !defined (_POSIX_VERSION) && !defined(WINDOWS32) && !defined(AMIGA_GCC)
 
 # ifndef VMS
 long int lseek ();

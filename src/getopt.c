@@ -61,7 +61,7 @@ this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 /* This needs to come after some library #include
    to get __GNU_LIBRARY__ defined.  */
-#ifdef	__GNU_LIBRARY__
+#if defined __GNU_LIBRARY__ || defined AMIGA_GCC
 /* Don't include stdlib.h for non-GNU C libraries because some of them
    contain conflicting prototypes for getopt.  */
 # include <stdlib.h>
@@ -201,7 +201,7 @@ static char *posixly_correct;
 /* Avoid depending on library functions or files
    whose names are inconsistent.  */
 
-#ifndef getenv
+#if !defined getenv && !defined AMIGA_GCC
 extern char *getenv ();
 #endif
 

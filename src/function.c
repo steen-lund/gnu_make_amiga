@@ -25,6 +25,8 @@ this program.  If not, see <https://www.gnu.org/licenses/>.  */
 
 #ifdef _AMIGA
 #include "amiga.h"
+#include <dos/dos.h>
+#include <proto/dos.h>
 #endif
 
 
@@ -2023,9 +2025,6 @@ func_shell_base (char *o, char **argv, int trim_newlines)
      spawn the shell program, we dup our own stdout back to the
      stdout descriptor.  The buffer reading is the same as above,
      except that we're now reading from a file.  */
-
-#include <dos/dos.h>
-#include <proto/dos.h>
 
   BPTR child_stdout;
   char tmp_output[FILENAME_MAX];

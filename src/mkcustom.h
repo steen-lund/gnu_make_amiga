@@ -44,6 +44,12 @@ char *alloca ();
 # endif
 #endif
 
+/* Building for AmigaOS with GCC (libnix) rather than SAS/C.  Set via
+   mkcustom.h so gnulib sources see it too.  */
+#if defined(_AMIGA) && defined(__GNUC__)
+# define AMIGA_GCC 1
+#endif
+
 /* Declare function prototypes for src/misc.c functions if needed.  */
 
 #include <stddef.h>

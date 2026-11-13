@@ -21,6 +21,9 @@ this program.  If not, see <https://www.gnu.org/licenses/>.  */
 #include "debug.h"
 
 #include <assert.h>
+#ifdef AMIGA_GCC
+# include <proto/exec.h>
+#endif
 #include <stdarg.h>
 
 #ifdef WINDOWS32
@@ -251,7 +254,12 @@ pid_t getpid ();
 pid_t make_pid ()
 {
 #ifdef _AMIGA
+#ifdef AMIGA_GCC
+  /* libnix rand() takes no argument; use the task address as a unique id.  */
+  return (pid_t) (long) FindTask (NULL);
+#else
   return rand (1000);
+#endif
 #else
   return getpid ();
 #endif
