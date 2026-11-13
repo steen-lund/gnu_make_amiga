@@ -50,7 +50,13 @@ this program.  If not, see <https://www.gnu.org/licenses/>.  */
 #endif
 
 #ifdef _AMIGA
+# ifdef AMIGA_GCC
+/* libnix stack swap (needs swapstack.o, see mk/amigaos.mk).  40000 was not
+   enough; 100000 is known to work.  */
+long __stack = 100000;
+# else
 long __stack = 40000; /* Make sure we have 20K of stack space */
+# endif
 #endif
 #ifdef VMS
 int vms_use_mcr_command = 0;

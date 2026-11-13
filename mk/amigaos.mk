@@ -29,7 +29,9 @@ CC = m68k-amigaos-gcc
 LD = $(CC)
 
 CFLAGS = -O2 -noixemul
-LDFLAGS = -noixemul
+# libnix only honours __stack (see src/main.c) if swapstack.o is linked in;
+# nothing references it, so force it with -u.
+LDFLAGS = -noixemul -Wl,-u,___stkinit
 LDLIBS = -lm
 
 # src/config.ami includes "src/mkcustom.h" relative to the source root.

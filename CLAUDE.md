@@ -16,7 +16,7 @@ Almost everything outside `src/amiga.*`, `src/config.ami`, `mk/Amiga.mk` and `SC
 PATH=/opt/amiga/bin:$PATH make -f Basic.mk MAKE_HOST=m68k-amigaos OUTDIR=/some/out/dir/
 ```
 
-`OUTDIR` must end in a slash; keep it outside the repo. `MAKE_HOST=m68k-amigaos` makes `Basic.mk` load `mk/amigaos.mk` (GCC: `m68k-amigaos-gcc -noixemul`, `-lm`), while the SAS/C build uses `mk/Amiga.mk`. This yields an AmigaOS hunk executable; it has only been linked, never run (no emulator checked). GCC-specific code is guarded by `AMIGA_GCC` (defined in `src/mkcustom.h` when `_AMIGA` and `__GNUC__` are both set) and `__GNUC__` blocks in `src/config.ami`. Typical issues are libnix clashing with make's own declarations (`concat` is renamed `make_concat` in `makeint.h`; `stpcpy`, `mempcpy`, `strcasecmp`, `umask`, `getenv`, `getopt` are taken from libnix).
+`OUTDIR` must end in a slash; keep it outside the repo. `MAKE_HOST=m68k-amigaos` makes `Basic.mk` load `mk/amigaos.mk` (GCC: `m68k-amigaos-gcc -noixemul`, `-lm`), while the SAS/C build uses `mk/Amiga.mk`. This yields an AmigaOS hunk executable; it has only been linked, never run (no emulator checked). GCC-specific code is guarded by `AMIGA_GCC` (defined in `src/mkcustom.h` when `_AMIGA` and `__GNUC__` are both set) and `__GNUC__` blocks in `src/config.ami`. The default Amiga shell stack is too small for make; `__stack` in `src/main.c` only takes effect because `mk/amigaos.mk` links libnix's `swapstack.o` with `-Wl,-u,___stkinit`. Typical issues are libnix clashing with make's own declarations (`concat` is renamed `make_concat` in `makeint.h`; `stpcpy`, `mempcpy`, `strcasecmp`, `umask`, `getenv`, `getopt` are taken from libnix).
 
 ### SAS/C and other
 
